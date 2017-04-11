@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import connect from 'react-redux';
 
 
 type LoginButtonProps = {
@@ -28,12 +27,12 @@ export const LogoutButton = ({onClick}: LogoutButtonProps) => (
 
 
 type AuthButtonProps = {
-  handleLogin: (method: string) => void,
+  handleTwitterLogin: () => void,
   handleLogout: () => void,
   loggedIn: boolean,
 };
-export const AuthButtons = ({loggedIn, handleLogout, handleLogin}: AuthButtonProps) => {
+export const AuthButtons = ({loggedIn, handleLogout, handleTwitterLogin}: AuthButtonProps) => {
   return loggedIn
     ? <LogoutButton onClick={handleLogout} />
-    : <LoginButton provider="twitter" onClick={() => handleLogin('twitter')} />;
+    : <LoginButton provider="twitter" onClick={handleTwitterLogin} />;
 }
