@@ -1,12 +1,16 @@
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import {createStore} from 'redux';
-import reducer from './reducers';
-
 import {Provider} from 'react-redux';
 
+import reducer from './reducers';
+import {notAuthed, handleUserAuthed} from './actions/auth';
+
 import App from './App';
+
 import './index.css';
 
 const store = createStore(
@@ -23,6 +27,21 @@ const config = {
   messagingSenderId: "33324339221"
 };
 firebase.initializeApp(config);
+
+
+// This is unique, it's probably one of the few actions we'll fire outside the
+// context of the webapp, but only because firebase's auth works in this semi-
+// global way.
+firebase.auth().onAuthStateChanged(function(user) {
+  // This is going to be weird initially because firebase handles this for us
+  // but it will get across how redux wants you to think about actions etc
+  if(user) {
+    store.dispatch(handleUserAuthed(user));
+  } else {
+    store.dispatch(notAuthed());
+  }
+})
+
 
 ReactDOM.render(
   <Provider store={store}>
