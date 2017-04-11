@@ -7,7 +7,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
 import reducer from './reducers';
-import {notAuthed, handleUserAuthed} from './actions/auth';
+import {notAuthed, userAuthedWithFirebase} from './actions/auth';
 
 import App from './App';
 
@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   // This is going to be weird initially because firebase handles this for us
   // but it will get across how redux wants you to think about actions etc
   if(user) {
-    store.dispatch(handleUserAuthed(user));
+    store.dispatch(userAuthedWithFirebase(user));
   } else {
     store.dispatch(notAuthed());
   }

@@ -1,5 +1,36 @@
 // @flow
 
+export type FirebaseUser = {
+  uid: string,
+  displayName: string | null, // assume this always has a value?
+  photoUrl: string | null, //not sure if this is really nullable
+  email: string | null, // i opted against collecting this, but we can change
+  emailVerified: boolean,
+  isAnonymous: boolean,
+  providerData: any[],
+  apiKey: string,
+  appName: string,
+  authDomain: string,
+  stsTokenManager: {
+    apiKey: string,
+    refreshToken: string,
+    accessToken: string,
+    expirationTime: number,
+  }
+};
+
+export type TwitterCredentials = {
+  accessToken: string,
+  secret: string,
+  provider: string,
+  providerId: string,
+}
+
+export type AuthPayload = {
+  user: FirebaseUser,
+  credential: TwitterCredentials,
+};
+
 // ok, bear with me. There are going to be several action creators here and
 // it's because we want to create a really good UI from the outset.
 
@@ -24,18 +55,34 @@ export const handleLogin = (method: 'twitter') => ({
   },
 });
 
-// if that succeeds, we will have an authed user
-export const handleUserAuthed = (payload: {}) => ({
-  type: 'LOGGED_IN',
+// if that succeeds, we will have an authed user. This is the action that
+// represents the first (and the only time we will get auth tokens from them
+// until they logout and log back in again)
+export const authedWithProvider = (payload: AuthPayload) => ({
+  type: 'AUTH_SUCCESS',
   payload,
 });
+
+// When firebase detects that auth has succeeded, it will always fire this
+// action. It happens immediately after auth succeeds
+export const userAuthedWithFirebase = (payload: FirebaseUser) => ({
+  type: 'AUTH_EXISTING',
+  payload,
+})
 
 // But it's possible, for whatever reason that they get to the twitter login
 // screen and they get cold feet. If that happens then dispatch this action.
 // We do get an error object here, btw and it includes a reason for why the
-// failure happened
-export const loginFailed = (errors: any) => ({
-  type: 'LOGIN_FAILURE',
+// failure happened.
+
+// It's also possible that the user previously authed with us, but deleted
+// their account with us (but not the twitter authorization). Twitter will
+// report this as an auth failure, even though it will immediately fire
+// AUTH_EXISTING with a fresh user account (we will _not_ get twitter
+// credentials as a result and errors will be {}).
+
+export const loginFailed = (errors: {} | {code: string, message: string}) => ({
+  type: 'AUTH_FAILURE',
   errors,
 })
 
@@ -47,3 +94,11 @@ export const handleLogout = () => ({
   type: 'LOGGED_OUT',
 });
 
+// I guess you gotta cover all the bases. It's possible (although i have to
+// imagine highly unlikely) that logout could just flat-out fail (i.e. your
+// network connection to google dies? i dunno.) anyhow, in that case, we get
+// an opaque error object, presumably outlining the actual error.
+export const logoutFailed = (error: any) => ({
+  type: 'LOGOUT_FAILURE',
+  errors: error,
+})
