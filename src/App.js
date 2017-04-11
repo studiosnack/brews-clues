@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react';
 
-import {handleLogin} from './actions/auth';
-
 import AppBody from './components/app-body';
 
 import logo from './logo.svg';
