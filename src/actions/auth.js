@@ -43,7 +43,7 @@ export const loginFailed = (errors: any) => ({
 // here because we don't really need one, but at some point in the future we
 // could use this to track what page a person logs out from or some other
 // salient detail if we cared
-export const logout = () => ({
+export const handleLogout = () => ({
   type: 'LOGGED_OUT',
 });
 
