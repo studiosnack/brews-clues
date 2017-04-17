@@ -20,7 +20,8 @@ export type Action = | {type: 'AUTH_MYSTERY'}
  | {type: 'AUTH_SUCCESS', payload: AuthPayload}
  | {type: 'AUTH_EXISTING', payload: FirebaseUser}
  | {type: 'AUTH_FAILURE', errors: any}
- | {type: 'LOGGED_OUT'};
+ | {type: 'LOGGED_OUT'}
+ | {type: 'LOGIN_FAILURE', errors: any};
 
 // anyhow, for now we don't have any actions (yet!) but we will!! and that is how we
 // will type them for our reducers

@@ -1,7 +1,7 @@
 // @flow
 
 import type {Action} from '../actions/types';
-import type {FirebaseUser, AuthPayload, TwitterCredentials} from '../actions/auth';
+import type {FirebaseUser, TwitterCredentials} from '../actions/auth';
 
 type AuthState = {
   status: 'mystery' | 'logging in' | 'logged in' | 'logged out' | 'approved' | 'failed',
