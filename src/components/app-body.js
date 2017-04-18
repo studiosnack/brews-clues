@@ -7,8 +7,8 @@ import LoginJunk from './login-junk.js';
 
 
 const FancyInput = (props) => {
-		return <label> {props.label} <input type="text" /></label>;
-	  }
+    return <label> {props.label} <input name={props.name} type="text" /></label>;
+    }
 
 class SimpleAppBody extends Component {
 
@@ -21,8 +21,8 @@ class SimpleAppBody extends Component {
       <LoginJunk />
 
 
-      <FancyInput label="Amount (g)"/>
-      <FancyInput label="Time" />
+      <FancyInput label="Amount (g)" name="amount" />
+      <FancyInput label="Time" name="time" />
 
 
 
