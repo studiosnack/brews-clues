@@ -1,0 +1,31 @@
+/*font-family: 'Lato', sans-serif;*/
+
+.user-menu {
+  font-family: 'Questrial', sans-serif;
+  font-size: 16px;
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.user-icon,
+.empty-user-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #eee;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  margin: auto 10px;
+  height: 30px;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+}
