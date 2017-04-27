@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 
 import LoginJunk from './login-junk.js';
-
+import AddCoffeeForm from './temporary-add-to-db-component';
 
 
 const FancyInput = (props) => {
@@ -24,7 +24,9 @@ class SimpleAppBody extends Component {
       <FancyInput label="Amount (g)" name="amount" />
       <FancyInput label="Time" name="time" />
 
-
+      <div>
+        <AddCoffeeForm />
+      </div>
 
     </div>
   }
