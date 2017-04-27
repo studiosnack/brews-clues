@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 
 import LoginJunk from './login-junk.js';
-
+import AddCoffeeForm from './temporary-add-to-db-component';
 
 
 // my test variables
@@ -47,7 +47,8 @@ const Item = ({data}) => {
   return (
     <div className="coffee-list">
       <p>{data.coffeeName} by {data.roasterName}</p>
-      <p>Roasted on {Date.parse(data.roastDate)} </p>
+      <p className="coffee-size">{data.coffeeSize}</p>
+      <p>Roasted on {data.roastDate} </p>
     </div>)
   
   //render a strikethrough if gone is true
@@ -64,7 +65,6 @@ const CoffeeShelf = () => {
 }
 
 
-
 class SimpleAppBody extends Component {
 
   render() {
@@ -79,10 +79,11 @@ class SimpleAppBody extends Component {
       <FancyInput label="Amount (g)" name="amount" />
       <FancyInput label="Time" name="time" />
 
+      <div>
+        <AddCoffeeForm />
+      </div>
 
       <CoffeeShelf shelfData={testShelf} />
-
-
     </div>
   }
 
