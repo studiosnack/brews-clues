@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 
-import css from './user-menu.css';
+import './user-menu.css';
 
 type User = {
   name?: string,
