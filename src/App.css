@@ -29,6 +29,7 @@
   width: 150px;
   border: 2px solid gray;
   background-color: #e3e3e3;
+  float: left;
 }
 
 .input-label {

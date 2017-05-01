@@ -3,12 +3,12 @@
 import React, {Component} from 'react';
 
 import LoginJunk from './login-junk.js';
+import FancyInput from './input-stuff.js';
 import AddCoffeeForm from './temporary-add-to-db-component';
+import CoffeeShelf from './test-shelf.js';
 
 
-// my test variables
-
-var arr = ["Tweed", "Counter Culture", "Yirg"];
+// my test variable
 
 var testShelf = {
   Shelf: [
@@ -35,34 +35,6 @@ var testShelf = {
     }
   ]
 };
-
-
-// components
-
-const FancyInput = (props) => {
-  return <label className="input-label"> {props.label} <input name={props.name} type="text" /></label>;
-}
-
-const Item = ({data}) => {
-  return (
-    <div className="coffee-list">
-      <p>{data.coffeeName} by {data.roasterName}</p>
-      <p className="coffee-size">{data.coffeeSize}</p>
-      <p>Roasted on {data.roastDate} </p>
-    </div>)
-  
-  //render a strikethrough if gone is true
-
-}
-
-const CoffeeShelf = () => { 
-  return (
-    <div>
-      {testShelf.Shelf.map(coffee =>  <Item data={coffee} key={coffee.roastDate} />)}
-    </div>
-  )
-
-}
 
 
 class SimpleAppBody extends Component {

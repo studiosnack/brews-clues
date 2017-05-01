@@ -38,6 +38,7 @@ type Coffee = {
   tags: string[],
 
   // YOUR OWN FEELINGS
+  // ARE VALID AND IMPORTANT!!
   // do you have random thoughts about the coffee now?
   notes: ?string,
   // did you take a photo of this coffee for some reason?
