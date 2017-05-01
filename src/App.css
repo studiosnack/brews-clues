@@ -24,7 +24,7 @@
 }
 
 .coffee-list {
-  margin:10px;
+  margin: 10px;
   padding: 10px;
   width: 150px;
   border: 2px solid gray;
@@ -33,7 +33,7 @@
 }
 
 .input-label {
-  color:green;
+  color: green;
 }
 
 .coffee-size {
