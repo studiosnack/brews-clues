@@ -44,3 +44,20 @@ h1 {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.coffee-list {
+  margin: 10px;
+  padding: 10px;
+  width: 150px;
+  border: 2px solid gray;
+  background-color: #e3e3e3;
+  float: left;
+}
+
+.input-label {
+  color: green;
+}
+
+.coffee-size {
+  font-size: 85%;
+}

@@ -2,12 +2,40 @@
 
 import React, {Component} from 'react';
 
+import LoginJunk from './login-junk.js';
+import FancyInput from './input-stuff.js';
 import AddCoffeeForm from './temporary-add-to-db-component';
+import CoffeeShelf from './test-shelf.js';
 
 
-const FancyInput = (props) => {
-    return <label> {props.label} <input name={props.name} type="text" /></label>;
+// my test variable
+
+var testShelf = {
+  Shelf: [
+    {
+      coffeeName: "La Laguna", 
+      roasterName: "Kuma Coffee", 
+      roastDate: 1495324800000, 
+      coffeeSize: "12 oz",
+      gone: false
+    }, 
+    {
+      coffeeName: "Timepiece", 
+      roasterName: "Tweed Coffee", 
+      roastDate: 1494028800000, 
+      coffeeSize: "16 oz",
+      gone: true
+    }, 
+    {
+      coffeeName: "Lotus", 
+      roasterName: "Barrett's", 
+      roastDate: 1492214400000,
+      coffeeSize: "16 oz",
+      gone: true
     }
+  ]
+};
+
 
 class SimpleAppBody extends Component {
 
@@ -21,6 +49,7 @@ class SimpleAppBody extends Component {
         <AddCoffeeForm />
       </div>
 
+      <CoffeeShelf shelfData={testShelf} />
     </div>
   }
 

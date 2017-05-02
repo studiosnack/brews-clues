@@ -1,0 +1,25 @@
+{
+  "Shelf": [
+    {
+      "coffee-name": "La Laguna", 
+      "roaster-name": "Kuma Coffee", 
+      "roast-date": 1495324800000, 
+      "coffee-size": "12 oz",
+      "gone": false
+    }, 
+    {
+      "coffee-name": "Timepiece", 
+      "roaster-name": "Tweed Coffee", 
+      "roast-date": 1494028800000, 
+      "coffee-size": "16 oz",
+      "gone": true
+    }, 
+    {
+      "coffee-name": "Lotus", 
+      "roaster-name": "Barrett's", 
+      "roast-date": 1492214400000,
+      "coffee-size": "16 oz",
+      "gone": true
+    }
+  ]
+}
