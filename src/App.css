@@ -4,18 +4,40 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 30px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  background-color: #455a64;
+  height: 100px;
+  padding: 15px;
   color: white;
+}
+
+.header-top {
+  display: flex;
+  height: 30px;
+}
+.header-left-box {
+  display: flex;
+  flex: 1;
+}
+.header-right-box {
+  display: flex;
+  /*justify-content: flex-end;*/
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 24px;
+  margin: 0;
+  font-family: 'Roboto Mono';
 }
 
 .App-intro {
   font-size: large;
+  font-family: 'Lato';
 }
 
 @keyframes App-logo-spin {
