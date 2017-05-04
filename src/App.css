@@ -54,8 +54,15 @@ h1 {
   float: left;
 }
 
+.brew-input {
+  margin: 0 auto;
+  padding: 1em;
+  width: 40%;
+}
+
 .input-label {
-  color: green;
+  display: block;
+  padding: 3px;
 }
 
 .coffee-size {

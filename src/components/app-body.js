@@ -2,8 +2,7 @@
 
 import React, {Component} from 'react';
 
-import LoginJunk from './login-junk.js';
-import FancyInput from './input-stuff.js';
+import BrewInput from './input-stuff.js';
 import AddCoffeeForm from './temporary-add-to-db-component';
 import CoffeeShelf from './test-shelf.js';
 
@@ -15,7 +14,7 @@ var testShelf = {
     {
       coffeeName: "La Laguna", 
       roasterName: "Kuma Coffee", 
-      roastDate: 1495324800000, 
+      roastDate: 1495324802000, 
       coffeeSize: "12 oz",
       gone: false
     }, 
@@ -42,8 +41,7 @@ class SimpleAppBody extends Component {
   render() {
     return <div>
 
-      <FancyInput label="Amount (g)" name="amount" />
-      <FancyInput label="Time" name="time" />
+      <BrewInput />
 
       <div>
         <AddCoffeeForm />
