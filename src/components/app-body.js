@@ -14,7 +14,7 @@ var testShelf = {
     {
       coffeeName: "La Laguna",
       roasterName: "Kuma Coffee",
-      roastDate: 1495324802000,
+      roastDate: 1495324800000,
       coffeeSize: "12 oz",
       gone: false
     },
