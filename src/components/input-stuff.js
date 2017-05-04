@@ -51,19 +51,19 @@ const FancyForm = (props) => {
     const newBrew = {};
     const timeNow = new Date();
 
+    newBrew['dateCreated'] = timeNow.getTime();
     newBrew['brewMethod'] = event.target.brewMethod.value;
     newBrew['coffeeAmount'] = event.target.amount.value;
     newBrew['brewDate'] = event.target.brewDate.value;
     newBrew['grindSetting'] = event.target.grindSetting.value;
     newBrew['name'] = event.target.name.value;
     newBrew['brewTime'] = event.target.time.value;
-    newBrew['dateCreated'] = timeNow.getTime();
     newBrew['notes'] = event.target.notes;
     console.log(newBrew);
     
     if (props.userid) {
       console.log("adding");
-      addBrew(props.userid, JSON.parse(newBrew));
+      addBrew(props.userid, newBrew);
     }
   }
 
@@ -89,10 +89,10 @@ const SimpleBrewInput = () => {
 	</div>)
 }
 
-const BrewInput = connect(
+const FancierForm = connect(
   state => ({
     userid: state.auth && state.auth.user && state.auth.user.uid,
   })
-)(SimpleBrewInput)
+)(FancyForm)
 
-export default BrewInput;
+export default FancierForm;
