@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 
-import FancyInput from './input-stuff.js';
+import FancierForm from './input-stuff.js';
 import AddCoffeeForm from './temporary-add-to-db-component';
 import CoffeeShelf from './test-shelf.js';
 
@@ -41,10 +41,10 @@ class SimpleAppBody extends Component {
   render() {
     return <div className="App-body">
 
+
       <h2 className="card-heading">Add Brew</h2>
       <div className="App-card">
-        <FancyInput label="Amount (g)" name="amount" />
-        <FancyInput label="Time" name="time" />
+        <FancierForm />
       </div>
 
       <h2 className="card-heading">Add JSON</h2>

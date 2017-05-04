@@ -1,12 +1,17 @@
 import React from 'react';
+import moment from 'moment';
+
 
 
 const Item = ({data}) => {
+  
+  const day = moment(data.roastDate);
+
   return (
     <div className="coffee-item">
       <p>{data.coffeeName} by {data.roasterName}</p>
       <p className="coffee-size">{data.coffeeSize}</p>
-      <p>Roasted on {data.roastDate} </p>
+      <p>Roasted {day.fromNow()} </p>
     </div>)
 
   //render a strikethrough if gone is true
