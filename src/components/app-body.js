@@ -12,22 +12,22 @@ import CoffeeShelf from './test-shelf.js';
 var testShelf = {
   Shelf: [
     {
-      coffeeName: "La Laguna", 
-      roasterName: "Kuma Coffee", 
-      roastDate: 1495324802000, 
+      coffeeName: "La Laguna",
+      roasterName: "Kuma Coffee",
+      roastDate: 1495324800000,
       coffeeSize: "12 oz",
       gone: false
-    }, 
+    },
     {
-      coffeeName: "Timepiece", 
-      roasterName: "Tweed Coffee", 
-      roastDate: 1494028800000, 
+      coffeeName: "Timepiece",
+      roasterName: "Tweed Coffee",
+      roastDate: 1494028800000,
       coffeeSize: "16 oz",
       gone: true
-    }, 
+    },
     {
-      coffeeName: "Lotus", 
-      roasterName: "Barrett's", 
+      coffeeName: "Lotus",
+      roasterName: "Barrett's",
       roastDate: 1492214400000,
       coffeeSize: "16 oz",
       gone: true
@@ -39,15 +39,25 @@ var testShelf = {
 class SimpleAppBody extends Component {
 
   render() {
-    return <div>
+    return <div className="App-body">
 
-      <FancierForm />
 
-      <div>
-        <AddCoffeeForm />
+      <h2 className="card-heading">Add Brew</h2>
+      <div className="App-card">
+        <FancierForm />
       </div>
 
-      <CoffeeShelf shelfData={testShelf} />
+      <h2 className="card-heading">Add JSON</h2>
+      <div className="App-card">
+        <div>
+          <AddCoffeeForm />
+        </div>
+      </div>
+
+      <h2 className="card-heading">Your Coffees</h2>
+      <div className="App-card">
+        <CoffeeShelf shelfData={testShelf} />
+      </div>
     </div>
   }
 
