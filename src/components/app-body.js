@@ -39,16 +39,25 @@ var testShelf = {
 class SimpleAppBody extends Component {
 
   render() {
-    return <div>
+    return <div className="App-body">
 
-      <FancyInput label="Amount (g)" name="amount" />
-      <FancyInput label="Time" name="time" />
-
-      <div>
-        <AddCoffeeForm />
+      <h2 className="card-heading">Add Brew</h2>
+      <div className="App-card">
+        <FancyInput label="Amount (g)" name="amount" />
+        <FancyInput label="Time" name="time" />
       </div>
 
-      <CoffeeShelf shelfData={testShelf} />
+      <h2 className="card-heading">Add JSON</h2>
+      <div className="App-card">
+        <div>
+          <AddCoffeeForm />
+        </div>
+      </div>
+
+      <h2 className="card-heading">Your Coffees</h2>
+      <div className="App-card">
+        <CoffeeShelf shelfData={testShelf} />
+      </div>
     </div>
   }
 
