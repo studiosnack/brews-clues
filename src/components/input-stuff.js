@@ -1,6 +1,7 @@
 import React from 'react';
-import moment from 'moment';
+import {connect} from 'react-redux';
 
+import {addBrew} from '../database/brew';
 
 var testEquip = ["Chemex", "Clever", "French Press"];
 
@@ -32,30 +33,23 @@ const FancyButton = (props) => {
     )
 }
 
-const FancyForm = () => {
+///
+
+const FancyForm = (props) => {
 
   // So I started out trying to make this generalizable, a FancyForm that can be 
   // used in other places. But now I've noticed that I'm making it very specific to
   /// just adding a brew. Should I be handling this submit in BrewInput instead?
 
-  function isValidJSON(formdata) {
-    let isValid = true;
-    try {
-      JSON.parse(formdata)
-    } catch (e) {
-      if (e instanceof SyntaxError) {
-        isValid = false;
-      }
-    }
-    return isValid;
-  }
-
   function handleSubmit(event) {
+
+    console.log(props.userid);
+    
     event.preventDefault();
-    /// coffeeRef, dateCreated [set to now?],
-    // notes, rating, waterBrewAmount, waterSoakAmount
+    /// still missing: coffeeRef, rating, waterBrewAmount, waterSoakAmount
+
     const newBrew = {};
-    timeNow = moment();
+    const timeNow = new Date();
 
     newBrew['brewMethod'] = event.target.brewMethod.value;
     newBrew['coffeeAmount'] = event.target.amount.value;
@@ -63,8 +57,14 @@ const FancyForm = () => {
     newBrew['grindSetting'] = event.target.grindSetting.value;
     newBrew['name'] = event.target.name.value;
     newBrew['brewTime'] = event.target.time.value;
-    newBrew['dateCreated'] = timeNow.unix;
-    console.log(isValidJSON(newBrew));
+    newBrew['dateCreated'] = timeNow.getTime();
+    newBrew['notes'] = event.target.notes;
+    console.log(newBrew);
+    
+    if (props.userid) {
+      console.log("adding");
+      addBrew(props.userid, JSON.parse(newBrew));
+    }
   }
 
   return (
@@ -72,7 +72,7 @@ const FancyForm = () => {
       <FancyInput label="Coffee Name" name="name" />
       <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip} />
       <FancyInput label="Brew Date" name="brewDate" />
-      <FancyInput label="Time " name="time" />
+      <FancyInput label="Brew Time " name="time" />
       <FancyInput label="Amount (g) " name="amount" /> 
       <FancyInput label="Grind Setting " name="grindSetting" />
       <FancyInput label="Notes " name="notes" /> 
@@ -81,11 +81,18 @@ const FancyForm = () => {
   )
 }
 
-const BrewInput = () => {
+const SimpleBrewInput = () => {
+
   return (
 	<div className="brew-input">
     <FancyForm />
 	</div>)
 }
+
+const BrewInput = connect(
+  state => ({
+    userid: state.auth && state.auth.user && state.auth.user.uid,
+  })
+)(SimpleBrewInput)
 
 export default BrewInput;
