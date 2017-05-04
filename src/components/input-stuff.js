@@ -55,6 +55,7 @@ const FancyForm = () => {
     /// coffeeRef, dateCreated [set to now?],
     // notes, rating, waterBrewAmount, waterSoakAmount
     const newBrew = {};
+    timeNow = moment();
 
     newBrew['brewMethod'] = event.target.brewMethod.value;
     newBrew['coffeeAmount'] = event.target.amount.value;
@@ -62,6 +63,7 @@ const FancyForm = () => {
     newBrew['grindSetting'] = event.target.grindSetting.value;
     newBrew['name'] = event.target.name.value;
     newBrew['brewTime'] = event.target.time.value;
+    newBrew['dateCreated'] = timeNow.unix;
     console.log(isValidJSON(newBrew));
   }
 
