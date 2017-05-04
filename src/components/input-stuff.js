@@ -58,7 +58,7 @@ const FancyForm = (props) => {
     newBrew['grindSetting'] = event.target.grindSetting.value;
     newBrew['name'] = event.target.name.value;
     newBrew['brewTime'] = event.target.time.value;
-    newBrew['notes'] = event.target.notes;
+    newBrew['notes'] = event.target.notes.value;
     console.log(newBrew);
     
     if (props.userid) {
