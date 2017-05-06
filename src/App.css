@@ -41,6 +41,7 @@ h1 {
   line-height: 24px;
   margin: 0;
   font-family: 'Roboto Mono';
+  -webkit-font-smoothing: antialiased;
 }
 h2 {
   font-family: "Roboto Mono", monospace;
