@@ -2,7 +2,7 @@
 
 import firebase from 'firebase';
 
-type Coffee = {
+export type Coffee = {
   // I guess this is what you would call the coffee
   // although names can be funny things...
   // If left out, this will be generated (if possible)
