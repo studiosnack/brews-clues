@@ -2,11 +2,12 @@
 
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import firebase from 'firebase';
+
+import {receiveCoffee} from './actions/coffee';
 
 import AppBody from './components/app-body';
 import AppHeader from './components/app-header';
-
-import firebase from 'firebase';
 
 import './App.css';
 
@@ -33,9 +34,9 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     const {uid} = this.props;
     if (uid) {
-      const userBrews = firebase.database().ref(`/brews/${uid}`);
-      userBrews.on('value', snapshot => {
-        console.log(snapshot.val())
+      const userBrews = firebase.database().ref(`/coffees/${uid}`);
+      userBrews.on('child_added', snapshot => {
+        this.props.dispatch(receiveCoffee(snapshot.val(), snapshot.key));
       })
     }
   }
