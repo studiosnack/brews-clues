@@ -33,7 +33,6 @@ body {
 }
 .header-right-box {
   display: flex;
-  /*justify-content: flex-end;*/
 }
 
 h1 {
@@ -43,10 +42,11 @@ h1 {
   margin: 0;
   font-family: 'Roboto Mono';
 }
-
-.App-intro {
-  font-size: large;
-  font-family: 'Lato';
+h2 {
+  font-family: "Roboto Mono", monospace;
+  font-weight: normal;
+  font-size: 16px;
+  margin: 15px auto 0 15px;
 }
 
 .App-card {
@@ -54,12 +54,6 @@ h1 {
   padding: 15px;
   background: white;
   margin: 15px auto 45px;
-}
-.card-heading {
-  font-family: "Roboto Mono", monospace;
-  font-weight: normal;
-  font-size: 16px;
-  margin: 15px auto 0 15px;
 }
 
 @keyframes App-logo-spin {

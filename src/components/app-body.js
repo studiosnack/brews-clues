@@ -41,12 +41,12 @@ class SimpleAppBody extends Component {
   render() {
     return <div className="App-body">
 
-      <h2 className="card-heading">Add Brew</h2>
+      <h2>Add Brew</h2>
       <div className="App-card">
         <FancierForm />
       </div>
 
-      <h2 className="card-heading">Add JSON</h2>
+      <h2>Add JSON</h2>
       <div className="App-card">
         <div>
           <AddCoffeeForm />
