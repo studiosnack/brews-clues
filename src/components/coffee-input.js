@@ -24,7 +24,6 @@ const FancyForm = (props) => {
       quantity: event.target.quantity.value,
       tags: event.target.tags.value.split(',').map(str => str.trim()),
       tastingNotes: event.target.notes.value.split(',').map(str => str.trim())
-
     };
 
     if (props.userid) {
