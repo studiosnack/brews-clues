@@ -6,12 +6,51 @@ import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
+// Eventually this would be stored elsewhere, yes?
 
-const FancyForm = (props) => {
 
-  function handleSubmit(event) {
+const FirstPanel = () => {
+  return (
+    <div>
+      <FancyInput label="Coffee Name " name="name" handleChange={this.handleChange}/>
+      <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip}
+        handleChange={this.handleChange}/>
+      <FancyInput label="Brew Date" name="brewDate" handleChange={this.handleChange} />
+    </div>
+  )
+}
+
+const SecondPanel = () => {
+  return (
+    <div>
+      <FancyInput label="Brew Time " name="time" />
+      <FancyInput label="Amount (g) " name="amount" />
+      <FancyInput label="Grind Setting " name="grindSetting" />
+      <FancyInput label="Notes " name="notes" />
+      <FancyButton name="brewButton" />
+    </div>
+ )
+}
+
+const ThirdPanel = (props) => {
+  return <div> Component 3 </div>
+}
+
+
+class FancyCarouselForm extends React.Component {
+  constructor (props){
+    super(props);
+    this.state = {page:1}
+    //do I have to intialiaze form data? keep it separate?
+  }
+
+  ///handleChange = (evt) => this.setState({name: evt.target.value});
+  handleChange = (evt) => console.log(name + evt.target.value);
+
+  handleSubmit(event) {
 
     event.preventDefault();
+
     /// still missing: coffeeRef, rating, waterBrewAmount, waterSoakAmount
 
     const timeNow = new Date();
@@ -27,33 +66,51 @@ const FancyForm = (props) => {
       notes: event.target.notes.value
     };
 
-    if (props.userid) {
-      console.log("adding");
-      addBrew(props.userid, newBrew);
-    }
+    //if (props.userid) {
+    //  console.log("adding");
+    //  addBrew(props.userid, newBrew);
+    //}
   }
 
-  return (
-    <div className="brew-input">
-    <form onSubmit={handleSubmit}>
-      <FancyInput label="Coffee Name" name="name" />
-      <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip} />
-      <FancyInput label="Brew Date" name="brewDate" />
-      <FancyInput label="Brew Time " name="time" />
-      <FancyInput label="Amount (g) " name="amount" />
-      <FancyInput label="Grind Setting " name="grindSetting" />
-      <FancyInput label="Notes " name="notes" />
-      <FancyButton name="brewButton" />
-    </form>
-    </div>
-  )
+  goTo = (pageNumber) => {
+    console.log("before " + this.state.page);
+    this.setState({
+      page: pageNumber
+    });
+    console.log("after " + this.state.page);
+  }
+
+//  updateName = (evt) => this.setState({name: evt.target.value});
+// <PageOneForm handleAChange={this.updateName} />
+
+
+render() {
+
+  return <div className="brew-input">
+    { this.state.page === 1 && <FirstPanel />}
+    { this.state.page === 2 && <SecondPanel />}
+    { this.state.page === 3 && <ThirdPanel />}
+
+
+    {this.state.page > 1 &&
+      <button onClick={()=>this.goTo(this.state.page-1)}>
+        <span> Prev </span>
+      </button> }
+
+    {this.state.page < 3 &&
+      <button onClick={()=>this.goTo(this.state.page+1)}>
+        <span> Next </span>
+      </button> }
+  </div>
+  }
+
 }
 
 
-const FancierBrewForm = connect(
+const FancierCarouselBrewForm = connect(
   state => ({
     userid: state.auth && state.auth.user && state.auth.user.uid,
   })
-)(FancyForm)
+)(FancyCarouselForm)
 
-export default FancierBrewForm;
+export default FancierCarouselBrewForm;

@@ -46,10 +46,6 @@ render() {
       <button onClick={()=>this.goTo(this.state.page+1)}>
         <span> Next </span>
       </button> }
-
-
-
-
   </div>
 }
 
