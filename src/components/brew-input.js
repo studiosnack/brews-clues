@@ -9,18 +9,18 @@ var testEquip = ["Chemex", "Clever", "French Press"];
 // Eventually this would be stored elsewhere, yes?
 
 
-const FirstPanel = () => {
+const FirstPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Coffee Name " name="name" handleChange={this.handleChange}/>
+      <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}/>
       <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip}
-        handleChange={this.handleChange}/>
-      <FancyInput label="Brew Date" name="brewDate" handleChange={this.handleChange} />
+        handleChange={props.handleChange}/>
+      <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange} />
     </div>
   )
 }
 
-const SecondPanel = () => {
+const SecondPanel = (props) => {
   return (
     <div>
       <FancyInput label="Brew Time " name="time" />
@@ -87,7 +87,7 @@ class FancyCarouselForm extends React.Component {
 render() {
 
   return <div className="brew-input">
-    { this.state.page === 1 && <FirstPanel />}
+    { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}/>}
     { this.state.page === 2 && <SecondPanel />}
     { this.state.page === 3 && <ThirdPanel />}
 

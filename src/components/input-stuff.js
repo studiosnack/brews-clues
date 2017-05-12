@@ -4,7 +4,7 @@ import React from 'react';
 const FancyInput = (props) => {
   return (
     <label className="input-label"> {props.label}
-      <input name={props.name} onchange={props.handleChange} type="text" />
+      <input name={props.name} handleChange={props.handleChange} type="text" />
     </label>
   )
 }
@@ -13,7 +13,7 @@ const FancyDropdown = (props) => {
   return (
     <div>
       <label className="input-label"> {props.label}
-      <select name={props.name} onchange={props.handleChange}>
+      <select name={props.name} handleChange={props.handleChange}>
         {props.options.map(equip => <option>{equip}</option>)}
       </select>
       </label>
