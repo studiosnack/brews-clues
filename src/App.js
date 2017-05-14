@@ -8,37 +8,38 @@ import {receiveCoffee} from './actions/coffee';
 
 import AppBody from './components/app-body';
 import AppHeader from './components/app-header';
+import FirebaseData from './database/data';
 
 import './App.css';
 
 
 class App extends Component {
+
   render() {
+    // dispatch is injected by `connect` and we'll use it to
+    // update the redux store.
+    const {dispatch} = this.props;
+
     return (
       <div className="App">
         <AppHeader />
         <AppBody />
+
+        { this.props.uid &&
+          // the reason this blocks on uid is because we _need_ it to
+          // be able to query the database.
+          // We may eventually decide that this FirebaseData is stupid
+          // and use something else and embed our data dependencies
+          // in some other less exotic way. ╮(. ❛ ᴗ ❛.)╭
+          <FirebaseData
+            location={`/coffees/${this.props.uid}`}
+            onChildAdded={snap => (
+              dispatch(receiveCoffee(snap.val(), snap.key))
+            )}
+          />
+        }
       </div>
     );
-  }
-
-  // Alright! Here we go lifecycle party!!
-  //
-  // I am not totally happy with this approach:
-  // Typically, the approach when adding an event listener is to put it
-  // in componentDidMount. The problem is that only runs once (on mount)
-  // but when the whole webapp loads, a userid doesn't exist yet, firebase
-  // is still trying to get a handle on whether or not somebody is still
-  // logged in or not. So instead, i let the component render and then if
-  // the uid ever shows up, it then creates the subscription for the brew.
-  componentDidUpdate(prevProps) {
-    const {uid} = this.props;
-    if (uid) {
-      const userBrews = firebase.database().ref(`/coffees/${uid}`);
-      userBrews.on('child_added', snapshot => {
-        this.props.dispatch(receiveCoffee(snapshot.val(), snapshot.key));
-      })
-    }
   }
 }
 
@@ -46,4 +47,9 @@ const mapStateToProps = state => ({
   uid: state.auth.user && state.auth.user.uid,
 })
 
+// you may remember that connect also can accept a second
+// argument "mapDispatchToProps" that lets you hide the details
+// of action creators as just props. We could do that here later
+// as an optimization for aesthetics, but for now it's good to
+// see what FirebaseData is doing and how it does it
 export default connect(mapStateToProps)(App);
