@@ -70,9 +70,9 @@ class FancyCarouselForm extends React.Component {
 
     console.log(newBrew);
 
-    if (props.userid) {
+    if (this.props.userid) {
       console.log("adding");
-      addBrew(props.userid, newBrew);
+      addBrew(this.props.userid, newBrew);
     }
   }
 
