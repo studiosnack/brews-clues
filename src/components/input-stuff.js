@@ -4,7 +4,7 @@ import React from 'react';
 const FancyInput = (props) => {
   return (
     <label className="input-label"> {props.label}
-      <input name={props.name} onChange={props.handleChange} type="text" />
+      <input name={props.name} onChange={props.handleChange} value={props.value} type="text" />
     </label>
   )
 }

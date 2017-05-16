@@ -12,10 +12,12 @@ var testEquip = ["Chemex", "Clever", "French Press"];
 const FirstPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}/>
+      <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}
+        value={props.name}/>
       <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip}
         handleChange={props.handleChange}/>
-      <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange} />
+      <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
+        value ={props.brewDate} />
     </div>
   )
   ///option to set to today
@@ -24,9 +26,12 @@ const FirstPanel = (props) => {
 const SecondPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}/>
-      <FancyInput label="Amount (g) " name="amount" handleChange={props.handleChange}/>
-      <FancyInput label="Grind Setting " name="grindSetting" handleChange={props.handleChange}/>
+      <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
+        value={props.brewTime} />
+      <FancyInput label="Amount (g) " name="amount" handleChange={props.handleChange}
+        value={props.amount} />
+      <FancyInput label="Grind Setting " name="grindSetting" handleChange={props.handleChange}
+        value={props.grindSetting} />
     </div>
  )
 }
@@ -34,7 +39,8 @@ const SecondPanel = (props) => {
 const ThirdPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Notes " name="notes" handleChange={props.handleChange}/>
+      <FancyInput label="Notes " name="notes" handleChange={props.handleChange}
+        value={props.notes} />
       <FancyButton name="brewButton" handleSubmit={props.handleSubmit}/>
     </div>
  )
@@ -85,10 +91,13 @@ class FancyCarouselForm extends React.Component {
 render() {
 
   return <div className="brew-input">
-    { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}/>}
-    { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}/>}
+    { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
+      name={this.state.name} brewDate={this.state.brewDate}/>}
+    { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
+      brewTime={this.state.time} amount={this.state.amount}
+      grindSetting={this.state.grindSetting} />}
     { this.state.page === 3 && <ThirdPanel handleChange={this.handleChange}
-      handleSubmit={this.handleSubmit}/>}
+      handleSubmit={this.handleSubmit} notes={this.state.notes} />}
 
 
     {this.state.page > 1 &&
