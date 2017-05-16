@@ -44,11 +44,9 @@ class FancyCarouselForm extends React.Component {
   constructor (props){
     super(props);
     this.state = {page:1}
-    ///do I have to intialize form data? keep it separate?
   }
 
   handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
-  ///handleChange = (evt) => console.log(evt.target.name + evt.target.value);
 
   handleSubmit = (event) => {
     console.log("submit fired");
@@ -76,7 +74,6 @@ class FancyCarouselForm extends React.Component {
       console.log("adding");
       addBrew(props.userid, newBrew);
     }
-
   }
 
   goTo = (pageNumber) => {
@@ -84,7 +81,6 @@ class FancyCarouselForm extends React.Component {
       page: pageNumber
     });
   }
-
 
 render() {
 
