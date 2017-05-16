@@ -18,36 +18,40 @@ const FirstPanel = (props) => {
       <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange} />
     </div>
   )
+  ///option to set to today
 }
 
 const SecondPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Brew Time " name="time" />
-      <FancyInput label="Amount (g) " name="amount" />
-      <FancyInput label="Grind Setting " name="grindSetting" />
-      <FancyInput label="Notes " name="notes" />
-      <FancyButton name="brewButton" />
+      <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}/>
+      <FancyInput label="Amount (g) " name="amount" handleChange={props.handleChange}/>
+      <FancyInput label="Grind Setting " name="grindSetting" handleChange={props.handleChange}/>
     </div>
  )
 }
 
 const ThirdPanel = (props) => {
-  return <div> Component 3 </div>
+  return (
+    <div>
+      <FancyInput label="Notes " name="notes" handleChange={props.handleChange}/>
+      <FancyButton name="brewButton" handleSubmit={props.handleSubmit}/>
+    </div>
+ )
 }
-
 
 class FancyCarouselForm extends React.Component {
   constructor (props){
     super(props);
     this.state = {page:1}
-    //do I have to intialiaze form data? keep it separate?
+    ///do I have to intialize form data? keep it separate?
   }
 
-  ///handleChange = (evt) => this.setState({name: evt.target.value});
-  handleChange = (evt) => console.log(name + evt.target.value);
+  handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
+  ///handleChange = (evt) => console.log(evt.target.name + evt.target.value);
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
+    console.log("submit fired");
 
     event.preventDefault();
 
@@ -57,39 +61,38 @@ class FancyCarouselForm extends React.Component {
 
     const newBrew = {
       dateCreated: timeNow.getTime(),
-      brewMethod: event.target.brewMethod.value,
-      coffeeAmount: event.target.amount.value,
-      brewDate: event.target.brewDate.value,
-      grindSetting: event.target.grindSetting.value,
-      name: event.target.name.value,
-      brewTime: event.target.time.value,
-      notes: event.target.notes.value
+      brewMethod: this.state.brewMethod,
+      coffeeAmount: this.state.amount,
+      brewDate: this.state.brewDate,
+      grindSetting: this.state.grindSetting,
+      name: this.state.name,
+      brewTime: this.state.time,
+      notes: this.state.notes
     };
 
-    //if (props.userid) {
-    //  console.log("adding");
-    //  addBrew(props.userid, newBrew);
-    //}
+    console.log(newBrew);
+
+    if (props.userid) {
+      console.log("adding");
+      addBrew(props.userid, newBrew);
+    }
+
   }
 
   goTo = (pageNumber) => {
-    console.log("before " + this.state.page);
     this.setState({
       page: pageNumber
     });
-    console.log("after " + this.state.page);
   }
-
-//  updateName = (evt) => this.setState({name: evt.target.value});
-// <PageOneForm handleAChange={this.updateName} />
 
 
 render() {
 
   return <div className="brew-input">
     { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}/>}
-    { this.state.page === 2 && <SecondPanel />}
-    { this.state.page === 3 && <ThirdPanel />}
+    { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}/>}
+    { this.state.page === 3 && <ThirdPanel handleChange={this.handleChange}
+      handleSubmit={this.handleSubmit}/>}
 
 
     {this.state.page > 1 &&
