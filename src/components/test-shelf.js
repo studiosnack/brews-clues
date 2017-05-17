@@ -1,10 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 
+import {connect} from 'react-redux';
 
 
 const Item = ({data}) => {
-  
+
   const day = moment(data.roastDate);
 
   return (
@@ -18,13 +19,22 @@ const Item = ({data}) => {
 
 }
 
-const CoffeeShelf = ({shelfData}) => {
+const CoffeeShelf = ({coffees}) => {
+  const shelfData = Object.keys(coffees).map(key => [key, coffees[key]]);
   return (
     <div className="coffee-list">
-      {shelfData.Shelf.map(coffee =>  <Item data={coffee} key={coffee.roastDate} />)}
+      {shelfData.map(([key, coffee]) =>  <Item data={coffee} key={key} />)}
     </div>
   )
 
 }
 
-export default CoffeeShelf;
+const mapStateToProps = state => ({
+  coffees: state.coffee,
+});
+
+export default connect(
+  mapStateToProps
+)(
+  CoffeeShelf
+);
