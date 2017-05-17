@@ -3,10 +3,17 @@
 import firebase from 'firebase'
 
 type Brew = {
-  name: string, // the name of the coffee
-  time: string, // the amount of time it brewed for
-  notes: string, // did you like it?
-  rating: -10 | 0 | 10, // thumbs down / neutral / up
+  brewMethod?: string, // how you made the coffee
+  brewDate: string, // timestamp for brew
+  coffeeAmount: string, // how much you used i.e. "20g"
+  coffeeRef: string, // the id for a specific coffee
+  notes?: string, // did you like it?
+  rating: -10 | 0 | 10, // thumbs down / neutral / up (default neutral)
+  name?: string, // the name of the coffee
+  brewTime?: string, // the amount of time it brewed for
+  waterSoakAmount?: string, // how much you soaked the grounds with
+  waterBrewAmount?: string, // how much water you added to the wet grounds
+  brewTime?: string, // how long, from soak to finish this took
 };
 
 export const addBrew = (userid: string, brew: Brew) => {
