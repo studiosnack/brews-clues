@@ -14,10 +14,11 @@ const FirstPanel = (props) => {
     <div>
       <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}
         value={props.name}/>
-      <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip}
-        handleChange={props.handleChange}/>
+      <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
+        options={testEquip}
+        />
       <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
-        value ={props.brewDate} />
+        value={props.brewDate} />
     </div>
   )
   ///option to set to today
