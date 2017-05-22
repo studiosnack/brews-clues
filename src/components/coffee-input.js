@@ -2,11 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {addCoffee} from '../database/coffee';
-import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
+import {FancyInput, FancyButton} from './input-stuff.js'
 
 
-// I'm using the same name...that feels wrong. Is it going to break it?
-// or just bad behavior?
 const FancyForm = (props) => {
 
   function handleSubmit(event) {

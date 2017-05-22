@@ -102,12 +102,12 @@ render() {
 
 
     {this.state.page > 1 &&
-      <button onClick={()=>this.goTo(this.state.page-1)}>
+      <button className="carousel-btn" onClick={()=>this.goTo(this.state.page-1)}>
         <span> Prev </span>
       </button> }
 
     {this.state.page < 3 &&
-      <button onClick={()=>this.goTo(this.state.page+1)}>
+      <button className="carousel-btn" onClick={()=>this.goTo(this.state.page+1)}>
         <span> Next </span>
       </button> }
   </div>

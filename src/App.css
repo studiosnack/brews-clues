@@ -96,3 +96,9 @@ h2 {
 .coffee-size {
   font-size: 85%;
 }
+
+.carousel-btn {
+  margin: 5px;
+  font-family: "Roboto Mono", monospace;
+}
+
