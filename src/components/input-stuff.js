@@ -23,7 +23,7 @@ const FancyDropdown = (props) => {
 const FancyButton = (props) => {
   return (
     <button name={props.name} type="submit" onClick={props.handleSubmit}>
-      Add Brew
+      {props.buttonText}
     </button>
     )
 }

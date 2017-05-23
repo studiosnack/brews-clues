@@ -6,8 +6,6 @@ import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
-// Eventually this would be stored elsewhere, yes?
-
 
 const FirstPanel = (props) => {
   return (
@@ -19,12 +17,16 @@ const FirstPanel = (props) => {
         />
       <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
         value={props.brewDate} />
+      <FancyButton name="dateButton"
+        handleSubmit={props.setDateToday}
+        //handleSubmit={()=>console.log("date")}
+        buttonText="Set Date to Today"/>
     </div>
   )
-  ///option to set to today
 }
 
 const SecondPanel = (props) => {
+
   return (
     <div>
       <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
@@ -42,7 +44,7 @@ const ThirdPanel = (props) => {
     <div>
       <FancyInput label="Notes " name="notes" handleChange={props.handleChange}
         value={props.notes} />
-      <FancyButton name="brewButton" handleSubmit={props.handleSubmit}/>
+      <FancyButton name="brewButton" handleSubmit={props.handleSubmit} buttonText="Add Brew"/>
     </div>
  )
 }
@@ -54,6 +56,13 @@ class FancyCarouselForm extends React.Component {
   }
 
   handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
+
+  setDateToday = (event) => {
+    console.log(event);
+    console.log("set date today");
+    event.preventDefault();
+    this.setState({["brewDate"]: "today"});
+  };
 
   handleSubmit = (event) => {
     console.log("submit fired");
@@ -93,7 +102,7 @@ render() {
 
   return <div className="brew-input">
     { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
-      name={this.state.name} brewDate={this.state.brewDate}/>}
+      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday} />}
     { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
       brewTime={this.state.time} amount={this.state.amount}
       grindSetting={this.state.grindSetting} />}
