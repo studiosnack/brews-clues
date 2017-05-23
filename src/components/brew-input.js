@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 
 import {addBrew} from '../database/brew';
 import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
@@ -58,10 +59,8 @@ class FancyCarouselForm extends React.Component {
   handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
 
   setDateToday = (event) => {
-    console.log(event);
-    console.log("set date today");
-    event.preventDefault();
-    this.setState({["brewDate"]: "today"});
+    const today = new Date();
+    this.setState({["brewDate"]: moment(today).format("M/D/Y")});
   };
 
   handleSubmit = (event) => {
