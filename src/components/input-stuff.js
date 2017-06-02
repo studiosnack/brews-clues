@@ -14,7 +14,7 @@ const FancyDropdown = (props) => {
     <div>
       <label className="input-label"> {props.label}
       <select name={props.name} onChange={props.handleChange}>
-        {props.options.map(equip => <option>{equip}</option>)}
+        {props.options.map(equip => <option value={equip}>{equip}</option>)}
       </select>
       </label>
     </div>)
@@ -23,7 +23,7 @@ const FancyDropdown = (props) => {
 const FancyButton = (props) => {
   return (
     <button name={props.name} type="submit" onClick={props.handleSubmit}>
-      Submit
+      {props.buttonText}
     </button>
     )
 }

@@ -6,7 +6,6 @@ import FancierCarouselBrewForm from './brew-input.js';
 import FancierCoffeeForm from './coffee-input.js';
 import AddCoffeeForm from './temporary-add-to-db-component';
 import CoffeeShelf from './test-shelf.js';
-import Carousel from './carousel.js'
 
 
 class SimpleAppBody extends Component {

@@ -1,29 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 
 import {addBrew} from '../database/brew';
 import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
-// Eventually this would be stored elsewhere, yes?
-
 
 const FirstPanel = (props) => {
   return (
     <div>
       <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}
         value={props.name}/>
-      <FancyDropdown label="Brew Method " name="brewMethod" options={testEquip}
-        handleChange={props.handleChange}/>
+      <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
+        options={testEquip}
+        />
       <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
-        value ={props.brewDate} />
+        value={props.brewDate} />
+      <FancyButton name="dateButton"
+        handleSubmit={props.setDateToday}
+        //handleSubmit={()=>console.log("date")}
+        buttonText="Set Date to Today"/>
     </div>
   )
-  ///option to set to today
 }
 
 const SecondPanel = (props) => {
+
   return (
     <div>
       <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
@@ -41,7 +45,7 @@ const ThirdPanel = (props) => {
     <div>
       <FancyInput label="Notes " name="notes" handleChange={props.handleChange}
         value={props.notes} />
-      <FancyButton name="brewButton" handleSubmit={props.handleSubmit}/>
+      <FancyButton name="brewButton" handleSubmit={props.handleSubmit} buttonText="Add Brew"/>
     </div>
  )
 }
@@ -53,6 +57,11 @@ class FancyCarouselForm extends React.Component {
   }
 
   handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
+
+  setDateToday = (event) => {
+    const today = new Date();
+    this.setState({["brewDate"]: moment(today).format("M/D/Y")});
+  };
 
   handleSubmit = (event) => {
     console.log("submit fired");
@@ -92,7 +101,7 @@ render() {
 
   return <div className="brew-input">
     { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
-      name={this.state.name} brewDate={this.state.brewDate}/>}
+      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday} />}
     { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
       brewTime={this.state.time} amount={this.state.amount}
       grindSetting={this.state.grindSetting} />}
@@ -101,12 +110,12 @@ render() {
 
 
     {this.state.page > 1 &&
-      <button onClick={()=>this.goTo(this.state.page-1)}>
+      <button className="carousel-btn" onClick={()=>this.goTo(this.state.page-1)}>
         <span> Prev </span>
       </button> }
 
     {this.state.page < 3 &&
-      <button onClick={()=>this.goTo(this.state.page+1)}>
+      <button className="carousel-btn" onClick={()=>this.goTo(this.state.page+1)}>
         <span> Next </span>
       </button> }
   </div>
