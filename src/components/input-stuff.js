@@ -1,5 +1,7 @@
 import React from 'react';
+import DayPickerInput from "react-day-picker/DayPickerInput";
 
+import "react-day-picker/lib/style.css"
 
 const FancyInput = (props) => {
   return (
@@ -28,4 +30,29 @@ const FancyButton = (props) => {
     )
 }
 
-export {FancyInput, FancyDropdown, FancyButton};
+class FancyDatePicker extends React.Component {
+  handleBirthdayChange = day => {
+    this.setState({
+      birthday: day
+    })
+  }
+
+  render() {
+    return (
+      <form>
+        <DayPickerInput
+          name="birthday"
+          placeholder="DD/MM/YYYY"
+          format="DD/MM/YYYY"
+          onDayChange={ this.handleBirthdayChange }
+          dayPickerProps={{
+            enableOutsideDays: true,
+          }}
+        />
+      </form>
+    )
+  }
+}
+
+
+export {FancyInput, FancyDropdown, FancyButton, FancyDatePicker};

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {addBrew} from '../database/brew';
-import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
+import {FancyInput, FancyDropdown, FancyButton, FancyDatePicker} from './input-stuff.js'
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
@@ -18,8 +18,9 @@ const FirstPanel = (props) => {
         />
       <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
         value={props.brewDate} />
+      <FancyDatePicker />
       <FancyButton name="dateButton"
-        handleSubmit={props.setDateToday}
+        onClick={props.setDateToday}
         //handleSubmit={()=>console.log("date")}
         buttonText="Set Date to Today"/>
     </div>
