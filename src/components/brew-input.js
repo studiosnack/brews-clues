@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {addBrew} from '../database/brew';
-import {FancyInput, FancyDropdown, FancyButton, FancyDatePicker} from './input-stuff.js'
+import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js';
+import FancyDatePicker from './date-picker.js';
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
