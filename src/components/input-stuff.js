@@ -14,7 +14,7 @@ const FancyDropdown = (props) => {
     <div>
       <label className="input-label"> {props.label}
       <select name={props.name} onChange={props.handleChange}>
-        {props.options.map(equip => <option value={equip}>{equip}</option>)}
+        {props.options.map(equip => <option key={equip} value={equip}>{equip}</option>)}
       </select>
       </label>
     </div>)
