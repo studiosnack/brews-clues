@@ -1,4 +1,7 @@
 import React from 'react';
+import DayPickerInput from "react-day-picker/DayPickerInput";
+
+import "react-day-picker/lib/style.css"
 
 
 const FancyInput = (props) => {
@@ -28,6 +31,23 @@ const FancyButton = (props) => {
     )
 }
 
+const FancyDayPickerInput = (props) => {
+  return(
+    <label className="input-label"> {props.label}
+      <DayPickerInput
+          name={props.name}
+          placeholder={props.brewDate}
+          format="DD/MM/YYYY"
+          onDayChange={props.handleDayChange}
+          dayPickerProps={{
+            enableOutsideDays: true,
+          }}
+        />
+      </label>
+      )
+    }
 
 
-export {FancyInput, FancyDropdown, FancyButton};
+
+
+export {FancyInput, FancyDropdown, FancyButton, FancyDayPickerInput};

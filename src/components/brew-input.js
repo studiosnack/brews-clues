@@ -3,10 +3,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {addBrew} from '../database/brew';
-import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js';
-import DayPickerInput from "react-day-picker/DayPickerInput";
-
-import "react-day-picker/lib/style.css"
+import {FancyInput, FancyDropdown, FancyButton, FancyDayPickerInput} from './input-stuff.js';
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
@@ -19,27 +16,18 @@ const FirstPanel = (props) => {
       <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
         options={testEquip}
         />
-      <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
-        value={props.brewDate} />
-      <DayPickerInput
-          name="brewDate"
+      <FancyDayPickerInput
           label="Brew Date"
+          name="brewDate"
           placeholder={props.brewDate}
-          format="DD/MM/YYYY"
           onDayChange={props.handleDayChange}
-          dayPickerProps={{
-            enableOutsideDays: true,
-          }}
         />
-      <FancyButton name="dateButton"
-        onClick={props.setDateToday}
-        buttonText="Set Date to Today"/>
+      <FancyButton name="dateButton" onClick={props.setDateToday} buttonText="Set Date to Today"/>
     </div>
   )
 }
 
 const SecondPanel = (props) => {
-
   return (
     <div>
       <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
@@ -73,9 +61,10 @@ class FancyCarouselForm extends React.Component {
 
   handleDayChange = day => this.setState({brewDate: moment(day).format("M/D/Y")});
 
-  setDateToday = (event) => {
+  setDateToday = () => {
     const today = new Date();
-    this.setState({["brewDate"]: moment(today).format("M/D/Y")});
+    // this.setState({brewDate: moment(today).format("M/D/Y")});
+    this.handleDayChange(today);
   };
 
   handleSubmit = (event) => {
