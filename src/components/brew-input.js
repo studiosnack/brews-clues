@@ -4,7 +4,9 @@ import moment from 'moment';
 
 import {addBrew} from '../database/brew';
 import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js';
-import FancyDatePicker from './date-picker.js';
+import DayPickerInput from "react-day-picker/DayPickerInput";
+
+import "react-day-picker/lib/style.css"
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
@@ -19,10 +21,18 @@ const FirstPanel = (props) => {
         />
       <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
         value={props.brewDate} />
-      <FancyDatePicker />
+      <DayPickerInput
+          name="brewDate"
+          label="Brew Date"
+          placeholder={props.brewDate}
+          format="DD/MM/YYYY"
+          onDayChange={props.handleDayChange}
+          dayPickerProps={{
+            enableOutsideDays: true,
+          }}
+        />
       <FancyButton name="dateButton"
         onClick={props.setDateToday}
-        //handleSubmit={()=>console.log("date")}
         buttonText="Set Date to Today"/>
     </div>
   )
@@ -52,6 +62,7 @@ const ThirdPanel = (props) => {
  )
 }
 
+
 class FancyCarouselForm extends React.Component {
   constructor (props){
     super(props);
@@ -59,6 +70,8 @@ class FancyCarouselForm extends React.Component {
   }
 
   handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
+
+  handleDayChange = day => this.setState({brewDate: moment(day).format("M/D/Y")});
 
   setDateToday = (event) => {
     const today = new Date();
@@ -103,7 +116,8 @@ render() {
 
   return <div className="brew-input">
     { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
-      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday} />}
+      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday}
+      handleDayChange={this.handleDayChange} />}
     { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
       brewTime={this.state.time} amount={this.state.amount}
       grindSetting={this.state.grindSetting} />}
