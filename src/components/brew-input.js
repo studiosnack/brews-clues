@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {addBrew} from '../database/brew';
-import {FancyInput, FancyDropdown, FancyButton} from './input-stuff.js'
+import {FancyInput, FancyDropdown, FancyButton, FancyDayPickerInput} from './input-stuff.js';
 
 
 var testEquip = ["Chemex", "Clever", "French Press"];
@@ -16,18 +16,18 @@ const FirstPanel = (props) => {
       <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
         options={testEquip}
         />
-      <FancyInput label="Brew Date" name="brewDate" handleChange={props.handleChange}
-        value={props.brewDate} />
-      <FancyButton name="dateButton"
-        handleSubmit={props.setDateToday}
-        //handleSubmit={()=>console.log("date")}
-        buttonText="Set Date to Today"/>
+      <FancyDayPickerInput
+          label="Brew Date"
+          name="brewDate"
+          placeholder={props.brewDate}
+          onDayChange={props.handleDayChange}
+        />
+      <FancyButton name="dateButton" onClick={props.setDateToday} buttonText="Set Date to Today"/>
     </div>
   )
 }
 
 const SecondPanel = (props) => {
-
   return (
     <div>
       <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
@@ -50,6 +50,7 @@ const ThirdPanel = (props) => {
  )
 }
 
+
 class FancyCarouselForm extends React.Component {
   constructor (props){
     super(props);
@@ -58,9 +59,12 @@ class FancyCarouselForm extends React.Component {
 
   handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
 
-  setDateToday = (event) => {
+  handleDayChange = day => this.setState({brewDate: moment(day).format("M/D/Y")});
+
+  setDateToday = () => {
     const today = new Date();
-    this.setState({["brewDate"]: moment(today).format("M/D/Y")});
+    // this.setState({brewDate: moment(today).format("M/D/Y")});
+    this.handleDayChange(today);
   };
 
   handleSubmit = (event) => {
@@ -101,7 +105,8 @@ render() {
 
   return <div className="brew-input">
     { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
-      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday} />}
+      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday}
+      handleDayChange={this.handleDayChange} />}
     { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
       brewTime={this.state.time} amount={this.state.amount}
       grindSetting={this.state.grindSetting} />}
