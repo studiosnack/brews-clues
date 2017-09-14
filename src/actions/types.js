@@ -2,6 +2,7 @@
 
 import type {FirebaseUser, AuthPayload} from '../actions/auth';
 import type {Coffee} from '../database/coffee';
+import type {Brew} from '../database/brew'
 
 // This is the generic action type: all actions (by convention) have this
 // kind of object shape. The only field that is "required" is the type one.
@@ -25,7 +26,12 @@ export type Action = | {type: 'AUTH_MYSTERY'}
  | {type: 'LOGIN_FAILURE', errors: any}
  | {type: 'RECEIVE_COFFEE', payload: Coffee, meta: {id: string}}
  | {type: 'UPDATE_COFFEE', payload: Coffee, meta: {id: string}}
- | {type: 'DELETE_COFFEE', meta: {id: string}};
+ | {type: 'DELETE_COFFEE', meta: {id: string}}
+ | {type: 'RECEIVE_BREW', payload: Brew, meta: {id:string}}
+ | {type: 'UPDATE_BREW', payload: Brew, meta: {id: string}}
+ | {type: 'DELETE_BREW', meta: {id: string}};
 
 // anyhow, for now we don't have any actions (yet!) but we will!! and that is how we
 // will type them for our reducers
+
+// soooooooo the above arent actually actions? -cb
