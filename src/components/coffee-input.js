@@ -57,8 +57,8 @@ class FancyCarouselForm extends React.Component {
       origin: this.state.origin,
       price: this.state.price,
       quantity: this.state.quantity,
-      tags: this.state.tags.split(',').map(str => str.trim()),
-      tastingNotes: this.state.notes.split(',').map(str => str.trim())
+      tags: this.state.tags.split(',').map(str => str.trim()), // what if empty
+      tastingNotes: this.state.tastingNotes.split(',').map(str => str.trim())
     };
 
     console.log(newCoffee);
