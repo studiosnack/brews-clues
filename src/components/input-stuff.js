@@ -37,7 +37,7 @@ const FancyDayPickerInput = (props) => {
       <DayPickerInput
           name={props.name}
           placeholder={props.brewDate}
-          format="DD/MM/YYYY"
+          format="MM/DD/YYYY"
           onDayChange={props.handleDayChange}
           dayPickerProps={{
             enableOutsideDays: true,

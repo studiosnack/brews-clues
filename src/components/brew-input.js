@@ -14,15 +14,13 @@ const FirstPanel = (props) => {
       <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}
         value={props.name}/>
       <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
-        options={testEquip}
-        />
+        options={testEquip}/>
       <FancyDayPickerInput
-          label="Brew Date"
+          label="Brew Date "
           name="brewDate"
           placeholder={props.brewDate}
           onDayChange={props.handleDayChange}
         />
-      <FancyButton name="dateButton" onClick={props.setDateToday} buttonText="Set Date to Today"/>
     </div>
   )
 }
@@ -54,17 +52,30 @@ const ThirdPanel = (props) => {
 class FancyCarouselForm extends React.Component {
   constructor (props){
     super(props);
-    this.state = {page:1}
+    this.state = {
+      page:1,
+      name: '',
+      brewMethod: '',
+      coffeeAmount: '',
+      brewDate: '',
+      grindSetting: '',
+      brewTime: '',
+      notes: '',
+    }
   }
 
-  handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
+  handleChange = evt => {
+    this.setState({[evt.target.name]: evt.target.value})
+  }
 
-  handleDayChange = day => this.setState({brewDate: moment(day).format("M/D/Y")});
+  handleDayChange = day => {
+    console.log('day ', day);
+    this.setState({brewDate: moment(day).format("M/D/Y")});
+  }
 
   setDateToday = () => {
-    const today = new Date();
-    // this.setState({brewDate: moment(today).format("M/D/Y")});
-    this.handleDayChange(today);
+    this.setState({brewDate: moment().format("M/D/Y")});
+    //this.handleDayChange(today);
   };
 
   handleSubmit = (event) => {
@@ -76,8 +87,9 @@ class FancyCarouselForm extends React.Component {
 
     const timeNow = new Date();
 
-    const newBrew = {
-      dateCreated: timeNow.getTime(),
+    const newBrew = { 
+      dateCreated: timeNow.getTime(), // required
+      // coffeeUsed: this.state.coffeeUsed, //required, should be from the coffees on our shelf?
       brewMethod: this.state.brewMethod,
       coffeeAmount: this.state.amount,
       brewDate: this.state.brewDate,
@@ -89,11 +101,11 @@ class FancyCarouselForm extends React.Component {
 
     console.log(newBrew);
 
-    if (this.props.userid) {
+    if (this.props.userid) { // if you aren't logged in, you can't add
       console.log("adding");
       addBrew(this.props.userid, newBrew);
     }
-  }
+  } // end of handleSubmit
 
   goTo = (pageNumber) => {
     this.setState({
@@ -103,7 +115,9 @@ class FancyCarouselForm extends React.Component {
 
 render() {
 
+
   return <div className="brew-input">
+  {console.log(this.state, " state")}
     { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
       name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday}
       handleDayChange={this.handleDayChange} />}
@@ -124,7 +138,7 @@ render() {
         <span> Next </span>
       </button> }
   </div>
-  }
+}
 
 }
 

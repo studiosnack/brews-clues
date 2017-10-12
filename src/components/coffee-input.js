@@ -1,13 +1,15 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {addCoffee} from '../database/coffee';
-import {FancyInput, FancyButton} from './input-stuff.js'
+import { addCoffee } from '../database/coffee';
+import { FancyInput, FancyButton } from './input-stuff';
 
 
 const FirstPanel = (props) => {
   return (
     <div>
+      <FancyInput label="Name " name="name" handleChange={props.handleChange}
+        value={props.name}/>
       <FancyInput label="Roaster " name="roaster" handleChange={props.handleChange}
         value={props.roaster}/>
       <FancyInput label="Date Roasted " name="dateRoasted" handleChange={props.handleChange}
@@ -36,15 +38,27 @@ const SecondPanel = (props) => {
 
 
 class FancyCarouselForm extends React.Component {
-  constructor (props){
+  constructor(props) {
     super(props);
-    this.state = {page:1}
+    this.state = {
+      page: 1,
+      name: '', //
+      roaster: '', // required
+      dateRoasted: '',
+      origin: '',
+      price: '', // required
+      quantity: '',
+      tags: '',
+      tastingNotes: '',
+    }
   }
 
-  handleChange = (evt) => this.setState({[evt.target.name]: evt.target.value});
+  handleChange = (evt) => {
+    this.setState({ [evt.target.name]: evt.target.value });
+  }
 
   handleSubmit = (event) => {
-    console.log("submit fired");
+    console.log('submit fired');
 
     event.preventDefault();
 
@@ -52,16 +66,17 @@ class FancyCarouselForm extends React.Component {
 
     const newCoffee = {
       dateCreated: timeNow.getTime(),
-      roaster: this.state.roaster,
+      name: this.state.name, // required
+      roaster: this.state.roaster, // required
       dateRoasted: this.state.dateRoasted,
       origin: this.state.origin,
-      price: this.state.price,
+      price: this.state.price, // required
       quantity: this.state.quantity,
       tags: this.state.tags.split(',').map(str => str.trim()), // what if empty
-      tastingNotes: this.state.tastingNotes.split(',').map(str => str.trim())
+      tastingNotes: this.state.tastingNotes.split(',').map(str => str.trim()),
     };
 
-    console.log(newCoffee);
+    console.log('new Coffee: ', newCoffee);
 
     if (this.props.userid) {
       console.log("coffee added to database");
@@ -71,18 +86,20 @@ class FancyCarouselForm extends React.Component {
 
   goTo = (pageNumber) => {
     this.setState({
-      page: pageNumber
+      page: pageNumber,
     });
   }
 
-render() {
-
-  return <div className="brew-input">
-    { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
-      roaster={this.state.roaster} dateRoasted={this.state.dateRoasted}
-      origin={this.state.origin} price={this.state.price} quantity={this.state.quantity}/>}
-    { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
-      tags={this.state.tags} tastingNotes={this.state.notes} handleSubmit={this.handleSubmit}/>}
+  render() {
+    return  <div className="brew-input">
+        { this.state.page === 1 && 
+          <FirstPanel handleChange={this.handleChange}
+          roaster={this.state.roaster} dateRoasted={this.state.dateRoasted}
+            origin={this.state.origin} price={this.state.price} quantity={this.state.quantity}/>
+        }
+        { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
+          tags={this.state.tags} tastingNotes={this.state.notes} handleSubmit={this.handleSubmit}/>
+        }
 
     {this.state.page > 1 &&
       <button className="carousel-btn" onClick={()=>this.goTo(this.state.page-1)}>
@@ -95,15 +112,19 @@ render() {
       </button> }
   </div>
   }
-
 }
 
+/*
+FancyCarouselForm.propTypes = {
+  handleChange: PropTypes.func,
+};
+*/
 
 const FancierCarouselCoffeeForm = connect(
   state => ({
     userid: state.auth && state.auth.user && state.auth.user.uid,
   })
-)(FancyCarouselForm)
+)(FancyCarouselForm);
 
 
 export default FancierCarouselCoffeeForm;
