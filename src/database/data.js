@@ -64,7 +64,7 @@ export default class DataConnection extends React.Component {
   }
 
   startConnection = () => {
-    const { location, onChildRemoved, onChildAdded, onChildChanged } = this.props;
+    const {location, onChildRemoved, onChildAdded, onChildChanged} = this.props;
     this.dbRef = firebase.database().ref(location);
 
     if (onChildAdded) {
