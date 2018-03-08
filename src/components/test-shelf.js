@@ -3,7 +3,6 @@ import moment from 'moment';
 
 import { connect } from 'react-redux';
 
-
 const Item = ({ data }) => {
   const day = moment(data.dateRoasted);
 

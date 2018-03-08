@@ -1,3 +1,5 @@
+<img src="http://25.media.tumblr.com/6948a7e3d47690678bdb0ad8d65d31bc/tumblr_mgvua32HXi1r86835o1_500.gif">
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
