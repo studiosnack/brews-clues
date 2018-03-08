@@ -1,14 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 
-const Item = ({data}) => {
-
+const Item = ({ data }) => {
   const day = moment(data.dateRoasted);
-  console.log('roastdate:' + data.dateRoasted)
-  console.log(day);
 
   return (
     <div className="coffee-item">
@@ -16,29 +13,27 @@ const Item = ({data}) => {
       <p className="coffee-size">Size: {data.quantity}</p>
       <p>Roasted {day.fromNow()} </p>
       <p> {data.tags} </p>
-    </div>)
+    </div>);
 
-  //render a strikethrough if gone is true
+  // render a strikethrough if gone is true
+};
 
-}
-
-const CoffeeShelf = ({coffees}) => {
+const CoffeeShelf = ({ coffees }) => {
   const shelfData = Object.keys(coffees).map(key => [key, coffees[key]]);
   console.log(shelfData);
   return (
     <div className="coffee-list">
-      {shelfData.map(([key, coffee]) =>  <Item data={coffee} key={key} />)}
+      {shelfData.map(([key, coffee]) => <Item data={coffee} key={key} />)}
     </div>
-  )
-
-}
+  );
+};
 
 const mapStateToProps = state => ({
   coffees: state.coffee,
 });
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
 )(
-  CoffeeShelf
+  CoffeeShelf,
 );

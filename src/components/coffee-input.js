@@ -82,12 +82,28 @@ class FancyCarouselForm extends React.Component {
       console.log("coffee added to database");
       addCoffee(this.props.userid, newCoffee);
     }
+
+    this.resetForm();
   }
 
   goTo = (pageNumber) => {
     this.setState({
       page: pageNumber,
     });
+  }
+
+  resetForm = () => {
+    this.setState({
+      page: 1,
+      name: '', //
+      roaster: '', // required
+      dateRoasted: '',
+      origin: '',
+      price: '', // required
+      quantity: '',
+      tags: '',
+      tastingNotes: '',
+    })
   }
 
   render() {
