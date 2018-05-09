@@ -12,9 +12,7 @@ import FirebaseData from './database/data';
 
 import './App.css';
 
-
 class App extends Component {
-
   render() {
     // dispatch is injected by `connect` and we'll use it to
     // update the redux store.
@@ -25,7 +23,7 @@ class App extends Component {
         <AppHeader />
         <AppBody />
 
-        { this.props.uid &&
+        {this.props.uid && (
           // the reason this blocks on uid is because we _need_ it to
           // be able to query the database.
           // We may eventually decide that this FirebaseData is stupid
@@ -33,11 +31,9 @@ class App extends Component {
           // in some other less exotic way. ╮(. ❛ ᴗ ❛.)╭
           <FirebaseData
             location={`/coffees/${this.props.uid}`}
-            onChildAdded={snap => (
-              dispatch(receiveCoffee(snap.val(), snap.key))
-            )}
+            onChildAdded={snap => dispatch(receiveCoffee(snap.val(), snap.key))}
           />
-        }
+        )}
       </div>
     );
   }
@@ -45,7 +41,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   uid: state.auth.user && state.auth.user.uid,
-})
+});
 
 // you may remember that connect also can accept a second
 // argument "mapDispatchToProps" that lets you hide the details
