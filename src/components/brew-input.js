@@ -11,16 +11,16 @@ var testEquip = ["Chemex", "Clever", "French Press"];
 const FirstPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Coffee Name " name="name" handleChange={props.handleChange}
-        value={props.name}/>
-      <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
-        options={testEquip}/>
       <FancyDayPickerInput
           label="Brew Date "
           name="brewDate"
           placeholder={props.brewDate}
           onDayChange={props.handleDayChange}
         />
+      <FancyDropdown label="Brew Method " name="brewMethod" handleChange={props.handleChange}
+        options={testEquip}/>
+      <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
+        value={props.brewTime} />
     </div>
   )
 }
@@ -28,8 +28,8 @@ const FirstPanel = (props) => {
 const SecondPanel = (props) => {
   return (
     <div>
-      <FancyInput label="Brew Time " name="time" handleChange={props.handleChange}
-        value={props.brewTime} />
+      <FancyDropdown label="Coffee Name " name="name" handleChange={props.handleChange}
+        options={props.name}/>
       <FancyInput label="Amount (g) " name="amount" handleChange={props.handleChange}
         value={props.amount} />
       <FancyInput label="Grind Setting " name="grindSetting" handleChange={props.handleChange}
@@ -114,18 +114,32 @@ class FancyCarouselForm extends React.Component {
   }
 
 render() {
-
+  const coffeeName = this.props.coffee.map(a => a.roaster)
+  // TODO: this needs to be linked up with the coffee id, so the db knows which coffee bag 
+  // we are dipping into
 
   return <div className="brew-input">
-  {console.log(this.state, " state")}
-    { this.state.page === 1 && <FirstPanel handleChange={this.handleChange}
-      name={this.state.name} brewDate={this.state.brewDate} setDateToday={this.setDateToday}
-      handleDayChange={this.handleDayChange} />}
-    { this.state.page === 2 && <SecondPanel handleChange={this.handleChange}
-      brewTime={this.state.time} amount={this.state.amount}
-      grindSetting={this.state.grindSetting} />}
-    { this.state.page === 3 && <ThirdPanel handleChange={this.handleChange}
-      handleSubmit={this.handleSubmit} notes={this.state.notes} />}
+    { this.state.page === 1 &&
+      <FirstPanel
+        handleChange={this.handleChange}
+        brewDate={this.state.brewDate}
+        brewTime={this.state.time}
+        setDateToday={this.setDateToday}
+        handleDayChange={this.handleDayChange} 
+      />}
+    { this.state.page === 2 &&
+      <SecondPanel
+        handleChange={this.handleChange}
+        name={coffeeName}
+        amount={this.state.amount}
+        grindSetting={this.state.grindSetting}
+      />}
+    { this.state.page === 3 &&
+      <ThirdPanel
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        notes={this.state.notes} 
+    />}
 
 
     {this.state.page > 1 &&
@@ -146,6 +160,7 @@ render() {
 const FancierCarouselBrewForm = connect(
   state => ({
     userid: state.auth && state.auth.user && state.auth.user.uid,
+    coffee: Object.keys(state.coffee).map(key => state.coffee[key]),
   })
 )(FancyCarouselForm)
 

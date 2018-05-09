@@ -2,12 +2,6 @@
 
 import type {Brew} from '../database/brew';
 
-// brew action
-// so yes, this is just copying what actions/coffee.js is doing...
-
-// Are there other things besides id that we need to add? 
-
-
 export const receiveBrew = (payload: Brew, id: string) => ({
   type: 'RECEIVE_BREW',
   payload,

@@ -1,10 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
-const Item = ({ data }) => {
+const Item = ({data}) => {
   const day = moment(data.dateRoasted);
 
   return (
@@ -18,9 +18,8 @@ const Item = ({ data }) => {
   // render a strikethrough if gone is true
 };
 
-const CoffeeShelf = ({ coffees }) => {
+const CoffeeShelf = ({coffees}) => {
   const shelfData = Object.keys(coffees).map(key => [key, coffees[key]]);
-  console.log(shelfData);
   return (
     <div className="coffee-list">
       {shelfData.map(([key, coffee]) => <Item data={coffee} key={key} />)}
